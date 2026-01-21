@@ -11,16 +11,14 @@ import teamRoutes from './routes/teams.js';
 dotenv.config();
 
 /* =======================
-   ENV VALIDATION
+   ENV WARNINGS (Render-safe)
 ======================= */
 if (!process.env.JWT_SECRET) {
-  console.error('❌ ERROR: JWT_SECRET is not set');
-  process.exit(1);
+  console.warn('⚠️ JWT_SECRET is not set');
 }
 
 if (!process.env.MONGODB_URI) {
-  console.error('❌ ERROR: MONGODB_URI is not set');
-  process.exit(1);
+  console.warn('⚠️ MONGODB_URI is not set');
 }
 
 /* =======================
@@ -87,8 +85,7 @@ mongoose
     });
   })
   .catch((error) => {
-    console.error('❌ MongoDB connection error:', error);
-    process.exit(1);
+    console.error('❌ MongoDB connection error:', error.message);
   });
 
 export default app;
