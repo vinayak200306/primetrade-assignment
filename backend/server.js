@@ -55,12 +55,30 @@ app.get('/api/health', (req, res) => {
 /* =======================
    404 HANDLER
 ======================= */
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Route not found',
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ... (previous routes) ...
+
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
   });
-});
+} else {
+  // 404 HANDLER for API routes only in dev (or if static file not found in prod)
+  app.use((req, res) => {
+    res.status(404).json({
+      success: false,
+      message: 'Route not found',
+    });
+  });
+}
 
 /* =======================
    ERROR HANDLER
