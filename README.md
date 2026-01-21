@@ -58,7 +58,7 @@ JWT_SECRET=supersecretkey" > .env
 
 # Start backend
 npm run dev
-➡️ Backend runs at http://localhost:5000
+➡️ Backend runs at (https://primetrade-assignment-1-in59.onrender.com/api)
 
 
 Open another terminal tab (or stop backend with Ctrl+C), then:
@@ -69,7 +69,7 @@ npm install
 npm run dev
 
 
-➡️ Frontend runs at http://localhost:3000
+➡️ Frontend runs at https://primetrade-assignment-2.onrender.com/login
 
 
 
